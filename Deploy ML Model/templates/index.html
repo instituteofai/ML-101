@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <title>Housing Prices </title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+        <script>
+          $(document).ready(function(e){
+            $('#submit_button').click(function() {
+                var user_data = {};
+                $.each($('form').serializeArray(), function(i, field) {
+                    user_data[field.name] = field.value;
+                });
+                console.log(user_data)
+        
+                $.ajax({
+                    url: '/predict',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(user_data),
+                    dataType: 'json',
+                    success: function(res) {
+                        console.log(res)
+                        $('#price').text(Math.round(res.result[0]))
+                        $('#age').text(user_data.housing_median_age)
+                        $('#distance').text(user_data.ocean_proximity)
+                        $('#lon').text(user_data.longitude)
+                        $('#lat').text(user_data.latitude)
+                    }
+                })
+                return false
+            })
+        })
+        </script>
+        
+    </head>
+    <body>
+      <div class="ui container">
+          <h1>Housing Prices Prediction</h1>
+          <p>Hello {{name}}</p>
+          <hr>
+          <div class="ui grid">
+              <div class="three column row">
+                  <div class="column">
+                      <a class="ui green button" href="/test_results">Get Prediction on All Test data</a>
+                  </div>
+                  <div class="column">
+                      <form id="user_data_form" class="ui form">
+                          <div class="field">
+                            <label>Longitude</label>
+                            <input type="text" name="longitude" placeholder="-118.39">
+                          </div>
+                          <div class="field">
+                              <label>Latitude</label>
+                              <input type="text" name="latitude" placeholder="34.12">
+                          </div>
+                          <div class="field">
+                              <label>House Age</label>
+                              <input type="text" name="housing_median_age" placeholder="29">
+                          </div>
+                          <div class="field">
+                              <label>Total Rooms</label>
+                              <input type="text" name="total_rooms" placeholder="6447">
+                          </div>
+                          <div class="field">
+                              <label>Total BedRooms</label>
+                              <input type="text" name="total_bedrooms" placeholder="1012">
+                          </div>
+                          <div class="field">
+                              <label>Population</label>
+                              <input type="text" name="population" placeholder="2184">
+                          </div>
+                          <div class="field">
+                              <label>Households</label>
+                              <input type="text" name="households" placeholder="960">
+                          </div>
+                          <div class="field">
+                              <label>Median Income</label>
+                              <input type="text" name="median_income" placeholder="8.2816">
+                          </div>
+                          <div class="field">
+                              <label>Ocean Proximity</label>
+                              <input type="text" name="ocean_proximity" placeholder="<1H OCEAN">
+                          </div>
+                          <button class="ui blue button" id="submit_button">Get Prediction</button>
+                        </form>
+                  </div>
+                  <div class="column">
+                      <div class="ui card">
+                          <div class="image">
+                            <img src="https://storage.googleapis.com/kaggle-competitions/kaggle/5407/media/housesbanner.png">
+                          </div>
+                          <div class="content">
+                            <div class="header">Predicted Price:
+                                <span id="price"></span>
+                            </div>
+                            <div class="meta">
+                              <span class="date">Age of the house:</span>
+                              <span id="age"></span>
+                            </div>
+                            <div class="description">
+                              Distance from the Ocean:
+                              <span id="distance"></span>
+                            </div>
+                          </div>
+                          <div class="extra content">
+                            <a>
+                              <i class="map marker icon"></i>
+                              <span id="lat"></span> Latitute
+                              <span id="lon"></span> Longitude
+                            </a>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </body>
+</html>
