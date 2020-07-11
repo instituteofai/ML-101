@@ -3,11 +3,11 @@
 
 ### End to End Regression
 
-https://github.com/instituteofai/ML-101/blob/master/Assignments/Regression/Assignment%208.ipynb
+[House Prices: Advanced Regression Techniques [Rahul]](https://github.com/instituteofai/ML-101/blob/master/Assignments/Regression/Assignment%208-rahul.ipynb)
 
-https://github.com/instituteofai/ML-101/blob/master/Assignments/Regression/Assignment10_Regression.ipynb
+[House Prices: Advanced Regression Techniques [Dibyendu]](https://github.com/instituteofai/ML-101/blob/master/Assignments/Regression/Assignment%2011-dibyendu.ipynb)
 
-https://github.com/instituteofai/ML-101/blob/master/Assignments/Regression/Assignment%2011.ipynb
+[House Prices: Advanced Regression Techniques [Pratik]](https://github.com/instituteofai/ML-101/blob/master/Assignments/Regression/Assignment10_Regression-pratik.ipynb)
 
 
 ### End to End Classification
